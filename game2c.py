@@ -260,34 +260,31 @@ def parse(l):
                 pass
 
         elif s[0:3]=='@=(':
-
-            l=loopstack[0:len(loopstack)-1]
+            i=""
             if len(loopstack):
-                i=loopstack[len(loopstack)-1:len(loopstack)]
+                i=loopstack.pop(-1)
 
-            if i==["do"]: # until
-                loopstack=l
+            if i=="do": # until
                 v,idx=expression(s,2)
                 print("} ",end='')
                 print(f"while(!{v}); ",end='')
 
-            elif i==["for"]: # next
+            elif i=="for": # next
                 ch=s[3].upper()
-                loopstack=l
                 v,idx=expression(s,2)
-                print(f"{ch}={v};",end='')
-                print(" }",end='')
+                print(f"{ch}={v}; ",end='')
+                print("} ",end='')
 
         elif s[0:2]=='@=': # next
-            ch=s[2].upper()
-            l=loopstack[0:len(loopstack)-1]
+            i=""
             if len(loopstack):
-                i=loopstack[len(loopstack)-1:len(loopstack)]
-            if i==["for"]:
-                loopstack=l
+                i=loopstack.pop(-1)
+            ch=s[2].upper()
+
+            if i=="for":
                 v,idx=expression(s,2)
-                print(f"{ch}={v};",end='')
-                print(" }",end='')
+                print(f"{ch}={v}; ",end='')
+                print("} ",end='')
 
         elif s[0]=='@': # do
             print("do { ",end='')
