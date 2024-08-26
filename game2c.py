@@ -67,7 +67,7 @@ def term(s,idx):
 
     elif s[idx]=='+':
         (o,idx)=term(s,idx+1)
-        return "abs("+o+")",idx
+        return "(+("+o+"))",idx
 
     elif s[idx]=='#':
         (o,idx)=term(s,idx+1)
@@ -246,7 +246,14 @@ def parse(l):
                 if idx<len(s) and s[idx]==',': # for
                     (p,idx)=expression(s,idx+1)
                     print("while(1) { if (!(",end='')
-                    ies='<' if eval(o)<eval(p) else '>'
+
+                    try:
+                        a,b=eval(o),eval(p)
+                    except:
+                        ies='<'
+                    else:
+                        ies='<' if a<b else '>'
+
                     print(f"{ch}{ies}={p})) break; ",end='')
                     loopstack+=["for"]
             else:
