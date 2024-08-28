@@ -12,7 +12,7 @@ def out_header():
     print("static unsigned char memory[65536]={0};")
     print("static int tmp,reminder;")
     print("static char buff[100]={0};")
-    print("int ia(char *s,int v) {if (v){int i=0,r;for(r=v;r/=10;i++);ia(s,v/10);s[i++]=v%10+48;s[i]=0}}");
+    print("int ia(char *s,int v) {if (v){int i=0,r;for(r=v;r/=10;i++);ia(s,v/10);s[i++]=v%10+48;s[i]=0;}}");
     print("void pretprt(short c,short v) {")
     print("ia(buff,v); ")
     print("for(short j=0;j<c-strlen(buff);j++) printf(\" \"); ")
@@ -202,7 +202,7 @@ def parse(l):
             if s[idx:idx+2]==')=':
                 idx+=2
                 p,idx=expression(s,idx)
-                print(f"pretprt((short){o},(short){p}); ")
+                print(f"pretprt((short){o},(short){p}); ",end='')
             else:
                 pass
             pass
@@ -359,7 +359,7 @@ def pass2(file):
             cp=n
             if s:
                 parse(s)
-        print("")
+            print("")
     f.close()
     return
 
