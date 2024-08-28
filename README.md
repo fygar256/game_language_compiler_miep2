@@ -1,3 +1,5 @@
+# 日本語
+
 GAME言語からCへ変換するコンパイラをpythonで書いてみました。
 
 GAME言語コンパイラ -  miep.py
@@ -29,6 +31,8 @@ version 1.0.1 2024/8/27
 ・for-next,do-untl文の、for文またはdo文一つに対して複数のnext文、until文がある場合には対応していません。
 
 ・for-next文の制御変数に配列が使えない
+
+# in English
 
 I wrote a compiler in python to convert from GAME language to C.
 
