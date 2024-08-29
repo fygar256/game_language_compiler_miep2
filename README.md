@@ -2,7 +2,7 @@
 
 GAME言語からCへ変換するコンパイラをpythonで書いてみました。
 
-GAME言語コンパイラ -  miep.py
+GAME言語コンパイラ -  miep2.py
 
 `./miep2.py file.gm >out.c`とすると、GAME言語で書かれたfile.gmをCのソースファイルに変換し、out.cに出力します。
 
