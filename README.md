@@ -1,12 +1,13 @@
+
 # 日本語
 
 GAME言語からCへ変換するコンパイラをpythonで書いてみました。
 
 GAME言語コンパイラ -  miep2.py
 
-`./miep2.py file.gm >out.c`とすると、GAME言語で書かれたfile.gmをCのソースファイルに変換し、out.cに出力します。
+`./miep2.py file.gm >out.c`とすると、GAME言語で書かれたfile.gmをCのソースに変換し、out.cに出力します。
 
-本当はMIEP2ではなく、MIEPにしたいのですが、MIEPという名前は、43年前にすでに中学生の僕と師匠の浜田さんがMicro Integer Expression Processorとして、自作のゲーム言語互換インタプリタ・コンパイラシステムに名付けていたので、2が付きました。
+本当はMIEP2ではなく、MIEPにしたいのですが、MIEPという名前は、43年前に中学生の僕と師匠の浜田さんがMicro Integer Expression Processorとして、自作のゲーム言語互換インタプリタ・コンパイラシステムに既に名付けていたので、2が付きました。
 
 out.cはccでコンパイル可能です。 `cc out.c -o a.out`、`./a.out`で実行することが出来ます。
 
@@ -32,27 +33,31 @@ version 1.0.1 2024/8/27
 
 ・for-next文の制御変数に配列が使えない
 
-# in English
+・for文の終値に変数を使うと、カウントアップとして扱われる。
+
+・next文に２重以上の括弧があるとバグる。
+
+# in English 
 
 I wrote a compiler in python to convert from GAME language to C.
 
-GAME language compiler - miep.py
+GAME language compiler - miep2.py
 
-. /miep2.py file.gm >out.c will convert file.gm written in GAME language to C source file and output to out.c.
+`. /miep2.py file.gm >out.c` will convert file.gm written in GAME language to C source and output to out.c.
 
-I really want to use MIEP instead of MIEP2, but the name MIEP was already given 43 years ago by me, a junior high school student, and my teacher, Mr. Hamada, as Micro Integer Expression Processor, to a game language compatible interpreter/compiler system of our own making, 2 was attached.
+Actually, I would like to name it MIEP instead of MIEP2, but the name MIEP was already given to my own game language compatible interpreter/compiler system as Micro Integer Expression Processor by me, a junior high school student, and my teacher, Mr. Hamada, 43 years ago, so it was named 2 was added.
 
-out.c can be compiled with cc. cc out.c -o a.out, . /a.out can be used to execute it.
+out.c can be compiled with cc. `cc out.c -o a.out`, `. /a.out` to execute it.
 
-In general, if verbosity is allowed, sources written in lower-level programming languages are easier to translate into higher-level programming languages.
+In general, if verbosity is allowed, sources written in lower-level programming languages can be easily translated into higher-level programming languages.
 
-Optimization is not done. Error checking is lax.
+It is not optimized. Error checking is lax.
 
 It uses the cc inline assembler and is for x86_64 linux systems.
 
 ! =n(gosub) and] (ret) are machine dependent parts, the rest are machine independent. It is my future task to make it completely machine-independent so that it can be hung on a general C compiler, but it may be difficult to write subroutine calls due to the C language specification.
 
-Completed
+Any way completed.
 
 version 1.0.0 8/26/2024
 
@@ -60,9 +65,14 @@ A little version up, renamed.
 
 version 1.0.1 8/27/2024
 
-Problems for future issues
+# Issues for future work
+
 The for-next and do-untl statements do not support the case where there are multiple next and until statements for a single for or do statement.
 
-Arrays cannot be used as control variables for for-next statements.
+Arrays cannot be used as control variables in the for-next statement.
+
+If a variable is used for the end value of a for statement, it is treated as a count-up.
+
+If there are two or more parentheses in the next statement, it is buggy.
 
 Translated with DeepL.com (free version)
